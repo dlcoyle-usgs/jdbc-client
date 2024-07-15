@@ -37,8 +37,11 @@ public class JdbcClientPostService implements PostService {
 
     @Override
     public void create(Post post) {
+//        var updated = jdbcClient.sql("INSERT INTO post(id,title,slug,date,time_to_read,tags) values(?,?,?,?,?,?)")
+//                .params(List.of(post.id(),post.title(),post.slug(),post.date(),post.timeToRead(),post.tags()))
+//                .update();
         var updated = jdbcClient.sql("INSERT INTO post(id,title,slug,date,time_to_read,tags) values(?,?,?,?,?,?)")
-                .params(List.of(post.id(),post.title(),post.slug(),post.date(),post.timeToRead(),post.tags()))
+                .params(List.of(post.id(), post.title(), post.slug(), post.date(), post.timeToRead(), post.tags()))
                 .update();
 
         Assert.state(updated == 1, "Failed to create post " + post.title());

@@ -13,15 +13,23 @@ import java.time.LocalDate;
 @SpringBootApplication
 public class Application {
 
+	/**
+	 * V1: @Qualifier("jdbcTemplatePostService")
+	 * V2:  @Qualifier("JdbcClientPostService")
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(@Qualifier("jdbcTemplatePostService") PostService postService) {
+	CommandLineRunner commandLineRunner(
+			@Qualifier("JdbcClientPostService")
+			PostService postService
+	) {
 		return args -> {
 			postService.create(new Post("1234", "Hello World", "hello-world", LocalDate.now(), 1, "java, spring"));
-		};
+	        };
 	}
 
 }

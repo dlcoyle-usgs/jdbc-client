@@ -1,26 +1,20 @@
 package dev.danvega.jdbcclient.post;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/posts")
-public class PostController {
+//@RestController
+//@RequestMapping("/api/posts")
+public class PostControllerV1 {
 
     private final PostService postService;
 
-    public PostController(@Qualifier("JdbcClientPostService") PostService postService) {
+    public PostControllerV1(JdbcTemplatePostService postService) {
         this.postService = postService;
     }
-
-//OLD:
-//    public PostController(JdbcTemplatePostService postService) {
-//        this.postService = postService;
-//    }
 
     @GetMapping("")
     List<Post> findAll() {
